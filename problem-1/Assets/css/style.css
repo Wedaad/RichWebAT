@@ -1,0 +1,40 @@
+.grid-row {
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    /* border: 1px solid black; */
+}
+
+.grid-column {
+    border: 1px solid black;
+}
+
+.inner-row {
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    border: 1px solid black;
+    margin: 2px;
+}
+
+/* If window size is less than 720px: */
+@media screen and (max-width: 720px) {
+
+    .grid-row {
+        display: grid;
+        grid-template-columns: 25% 25%;
+
+    }
+}
+
+/* If window size is less than 360px: */
+@media screen and (max-width: 500px) {
+
+    .inner-row {
+        display: grid;
+        border: 5px solid yellow;
+    }
+
+    h1 {
+
+        color: green;
+    }
+}
