@@ -1,7 +1,6 @@
 .grid-row {
     display: grid;
     grid-template-columns: 25% 25% 25% 25%;
-    /* border: 1px solid black; */
 }
 
 .grid-column {
@@ -9,7 +8,8 @@
 }
 
 .inner-row {
-    display: grid;
+    padding: 5%;
+    text-align: center;
     grid-template-columns: 25% 25% 25% 25%;
     border: 1px solid black;
     margin: 2px;
@@ -19,22 +19,17 @@
 @media screen and (max-width: 720px) {
 
     .grid-row {
-        display: grid;
-        grid-template-columns: 25% 25%;
+
+        grid-template-columns: repeat(2, 4fr); /* cols and fraction*/
 
     }
 }
 
 /* If window size is less than 360px: */
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 360px) {
 
-    .inner-row {
-        display: grid;
-        border: 5px solid yellow;
-    }
+    .grid-row {
 
-    h1 {
-
-        color: green;
+        grid-template-columns: 25%; 
     }
 }
