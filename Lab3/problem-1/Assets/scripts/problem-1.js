@@ -15,47 +15,57 @@ function formValidation() {
     let contactName = document.forms['contactForm']['contact_name'].value;
     let mobileNumber = document.forms['contactForm']['mobile_number'].value;
     let email = document.forms['contactForm']['email'].value;
-    // let regexEmailExp = new RegExp('[a-z0-9]+@[a-z]+\.[a-z][2,3}');
+    let regexName = /^[A-Za-z\s]*$/;
+    let regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
     // creating error div 
     let errorMsg = "";
 
     if(contactName == null || contactName == "") {
-        console.log("IN IF");
 
         errorMsg = "Error: Contact name must be filled in.";
         errorDiv.innerHTML = errorMsg;
         return false; 
+    }
+    
+    if(!regexName.test(contactName)) {
 
-    } else if (contactName.length > 20) {
+        errorMsg = "Error: Contact name can only contain letters and spaces.";
+        errorDiv.innerHTML = errorMsg;
+        return false; 
 
-        console.log("IN ELSE IF 1");
+    }
+
+    if(contactName.length > 20) {
+
         errorMsg = "Error: Name is too long.";
         errorDiv.innerHTML = errorMsg;
         return false;
-
     }
 
-    // } else if(isNaN(mobileNumber) && mobileNumber == null) { // mobile number validation
-    //     console.log("IN ELSE IF 2");
-    //     errorDiv.innerHTML = "Error: Mobile number must be numeric & filled in.";
-    //     document.body.appendChild(errorDiv);
-    //     return false;
-    // }
-    // } else if(!regexEmailExp) { // add validation for  email 
-    //     console.log("IN ELSE IF 3");
-    //     errorDiv.innerHTML = "Error: Please enter a valid email address."
-    //     document.body.appendChild(errorDiv);
-    //     return false;
+    if(mobileNumber == "" || mobileNumber == null){ // mobile number validation
 
-    else { // user input is fine and proceed to creating contact
-        
-        addContact(contactName, mobileNumber, email);
-        form.reset();
-        return true;
+        errorMsg = "Error: Mobile number must filled in.";
+    }
+    
+    if(isNaN(mobileNumber)) { // mobile number validation
+
+        errorMsg = "Error: Mobile number must be numeric.";
+        errorDiv.innerHTML = errorMsg;
+        return false;
     }
 
+    if(!regexEmail.test(email)) { // validation for  email 
 
+        errorMsg = "Error: Please enter a valid email address."
+        errorDiv.innerHTML = errorMsg;
+        return false;
+    }
+
+    // user input is fine and proceed to creating contact
+    addContact(contactName, mobileNumber, email);
+    form.reset();
+    return true;
 
 }
 
