@@ -7,9 +7,8 @@ form.onsubmit = (e) => {
     e.preventDefault();
 }
 
+// FUNCTION: to validate user inputs
 function formValidation() {
-
-    console.log("INSIDE FORMVALIDATION()");
 
     let errorDiv =  document.getElementById('error');
     let contactName = document.forms['contactForm']['contact_name'].value;
@@ -17,8 +16,6 @@ function formValidation() {
     let email = document.forms['contactForm']['email'].value;
     let regexName = /^[A-Za-z\s]*$/;
     let regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-
-    // creating error div 
     let errorMsg = "";
 
     if(contactName == null || contactName == "") {
@@ -46,6 +43,15 @@ function formValidation() {
     if(mobileNumber == "" || mobileNumber == null){ // mobile number validation
 
         errorMsg = "Error: Mobile number must filled in.";
+        errorDiv.innerHTML = errorMsg;
+        return false;
+    }
+
+    if(mobileNumber < 10) {
+
+        errorMsg = "Error: Mobile number is not valid.";
+        errorDiv.innerHTML = errorMsg;
+        return false;
     }
     
     if(isNaN(mobileNumber)) { // mobile number validation
@@ -64,12 +70,13 @@ function formValidation() {
 
     // user input is fine and proceed to creating contact
     addContact(contactName, mobileNumber, email);
+    errorDiv.style.visibility = "hidden";
     form.reset();
     return true;
 
 }
 
-// Function to display array contents in table form
+// FUNCTION: to display person object in table form
 function displayContacts(contact) {
 
     const table = document.getElementById('contact-table');
@@ -89,7 +96,7 @@ function displayContacts(contact) {
     table.appendChild(table_row);
 }
 
-// Function to populate phone directiory ARRAY
+// FUNCTION: to populate person object with user input
 function addContact(name, number, email) {
 
     console.log('INSIDE ADD CONTACT()'); 
@@ -104,33 +111,51 @@ function addContact(name, number, email) {
     displayContacts(person);
 }
 
+// FUNCTION: implents search feature to find a contact by mobile number - come back and look at this
 function mobileNumberSearch() {
 
+    let search_query = document.getElementById('search-bar').value;
+    let data = document.getElementsByTagName('tr');
+    let errorMsg = "";
 
+    // looping through the table at i = 1 because table headers is at i = 0
+    for(let i = 1; i < data.length; i++) {
+
+        if(!data[i].innerHTML.includes(search_query)) {
+
+            data[i].style.display = "none";
+            errorMsg = "Error: No Result.";
+            document.getElementById('noResult').innerHTML = errorMsg;
+            document.getElementById('noResult').style.visibility = "visible";
+
+        } else {
+
+            data[i].style.display = "";
+            document.getElementById('noResult').innerHTML = "";
+            document.getElementById('noResult').style.visibility = "hidden";
+        }
+    }
 }
 
-function sortNames() {
+// FUNCTION: to sort contact names in ascending order
+function sortContactNames() {
 
     let table, table_rows, switching, i, og_row, new_row, shouldSwitch;
     table = document.getElementById("contact-table");
     switching = true;
 
     while(switching) {
-        console.log("INSIDE WHILE SWITCHING");
         switching = false
         table_rows = table.rows;
 
         // looping through all rows except table headers
         for(i = 1; i < (table_rows.length - 1); i++) {
-            console.log("INSIDE FOR LOOP");
             shouldSwitch = false;
 
             og_row = table_rows[i].getElementsByTagName("td")[0];
             new_row = table_rows[i + 1].getElementsByTagName("td")[0];
 
             if(og_row.innerHTML.toLowerCase() > new_row.innerHTML.toLowerCase()) {
-                
-                console.log("INSIDE IF 1");
                 shouldSwitch = true;
                 break;
             }
@@ -138,7 +163,6 @@ function sortNames() {
         }
 
         if(shouldSwitch) {
-            console.log("INSIDE IF 2");
             table_rows[i].parentNode.insertBefore(table_rows[i + 1], table_rows[i]);
             switching =  true;
         }
