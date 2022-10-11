@@ -72,6 +72,14 @@ tr:nth-child(even) {
     color: red;
     text-align: center;
     text-transform: uppercase;
+    /* visibility: hidden; */
+}
 
+#noResult {
+
+    color: red;
+    text-align: center;
+    text-transform: uppercase;
+    visibility: hidden;
 
 }
