@@ -9,7 +9,38 @@ function countTitleWords(title) {
 
 }
 
+function displayFrequency(body_text) {
+
+  let result = {};
+  let strArr = body_text.split(/\s+/);
+
+  for(let i = 0; i < strArr.length; i++) {
+
+    let word = strArr[i];
+
+    if(result[word] === undefined) {
+
+      result[word] = 1;
+
+    } else {
+
+      result[word] += 1;
+
+    }
+
+  }
+
+  return result;
+
+}
+
 let request = fetch('https://jsonplaceholder.typicode.com/posts/');
   request.then(response => response.json())
-  .then(posts => console.log(posts.filter(posts => countTitleWords(posts.title)).map(posts => posts.title)));
+
+  .then(posts => {
+
+    console.log(posts.filter(posts => countTitleWords(posts.title)).map(posts => posts.title))  
+    console.log(posts.map(posts => displayFrequency(posts.body))) 
+
+  });
 
