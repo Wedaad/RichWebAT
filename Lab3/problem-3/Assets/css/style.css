@@ -1,0 +1,89 @@
+h1 {
+    text-align: center;
+}
+
+#profile-container {
+
+    position: relative;
+    border: 3px solid red;
+    /* padding: 2%; */
+}
+
+.search-style {
+
+    border: 3px solid black;
+    text-align: center;
+    padding: 2%;
+    margin: auto;
+    margin: 3%;
+}
+
+
+#user-profile {
+
+    border: 3px solid black;
+    width: 30%;
+    margin: 3%;
+
+}
+
+#user-profile-picture {
+
+    border: 1px solid black;
+    height: 200px;
+
+}
+
+#name {
+
+    border: 1px solid black;
+    height: 50px;
+}
+
+#username {
+
+    border: 1px solid black;
+    height: 50px;
+
+}
+
+#email {
+
+    border: 1px solid black;
+    height: 50px;
+
+}
+
+#location {
+
+    border: 1px solid black;
+    height: 50px;
+}
+
+#number-of-gists {
+
+    border: 1px solid black;
+    height: 50px;
+}
+
+#user-repos {
+
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    border: 3px solid black;
+    width: 30%;
+    margin: 3%;
+}
+
+#repo-name {
+
+    border: 1px solid black;
+    height: 50px;
+}
+
+#repo-desc {
+
+    border: 1px solid black;
+    height: 50px;
+}
