@@ -1,5 +1,3 @@
-console.log("Javascript loaded");
-
 // preventing default server side behaviour
 const form = document.querySelector('form');
 form.onsubmit = (e) => {
@@ -94,20 +92,18 @@ function displayContacts(contact) {
     table_row.appendChild(user_number);
     table_row.appendChild(user_email);
     table.appendChild(table_row);
+    
 }
 
 // FUNCTION: to populate person object with user input
 function addContact(name, number, email) {
 
-    console.log('INSIDE ADD CONTACT()'); 
     let person = {};
 
     person = {"name": name,
             "mobile_number": number,
             "email": email };
 
-  
-    console.log(person);
     displayContacts(person);
 }
 
@@ -117,49 +113,58 @@ function mobileNumberSearch() {
     let search_query = document.getElementById('search-bar').value;
     let data = document.getElementsByTagName('tr');
     let errorMsg = "";
+    let match_found = 0; 
 
     // looping through the table at i = 1 because table headers is at i = 0
     for(let i = 1; i < data.length; i++) {
 
-        if(!data[i].innerHTML.includes(search_query)) {
-
-            data[i].style.display = "none";
-            errorMsg = "Error: No Result.";
-            document.getElementById('noResult').innerHTML = errorMsg;
-            document.getElementById('noResult').style.visibility = "visible";
-
-        } else {
+        if(data[i].innerHTML.includes(search_query)) { // The row exists
 
             data[i].style.display = "";
-            document.getElementById('noResult').innerHTML = "";
+            match_found = 1;  // if a match is found
             document.getElementById('noResult').style.visibility = "hidden";
+
+        }  else { //row doesnt exist 
+
+            data[i].style.display = "none"; 
+
+            if(match_found === 0) { // The row doesn't exist
+
+                errorMsg = "Error: No Result.";
+                document.getElementById('noResult').style.visibility = "visible";
+                document.getElementById('noResult').innerHTML = errorMsg;
+
+            }
         }
     }
+
+    match_found = 0;
 }
 
-// FUNCTION: to sort contact names in ascending order
+// FUNCTION: to sort contact names in ascending/descending order onclick
 function sortContactNames() {
 
-    let table, table_rows, switching, i, og_row, new_row, shouldSwitch;
+    // https://www.w3schools.com/howto/howto_js_sort_list.asp
+    let table, table_rows, switching, i, current_row, next_row, shouldSwitch;
     table = document.getElementById("contact-table");
     switching = true;
 
     while(switching) {
-        switching = false
+        switching = false // no switching should take place until click is detected
         table_rows = table.rows;
 
         // looping through all rows except table headers
         for(i = 1; i < (table_rows.length - 1); i++) {
             shouldSwitch = false;
 
-            og_row = table_rows[i].getElementsByTagName("td")[0];
-            new_row = table_rows[i + 1].getElementsByTagName("td")[0];
+            current_row = table_rows[i].getElementsByTagName("td")[0];
+            next_row = table_rows[i + 1].getElementsByTagName("td")[0];
 
-            if(og_row.innerHTML.toLowerCase() > new_row.innerHTML.toLowerCase()) {
+
+            if(current_row.innerHTML.toLowerCase() > next_row.innerHTML.toLowerCase()) {
                 shouldSwitch = true;
                 break;
             }
-
         }
 
         if(shouldSwitch) {
