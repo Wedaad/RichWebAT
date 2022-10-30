@@ -1,5 +1,7 @@
+displayContacts();
 // preventing default server side behaviour
 const form = document.querySelector('form');
+let  change_order = true;
 form.onsubmit = (e) => {
 
     e.preventDefault();
@@ -67,7 +69,7 @@ function formValidation() {
     }
 
     // user input is fine and proceed to creating contact
-    addContact(contactName, mobileNumber, email);
+    createContact(contactName, mobileNumber, email);
     errorDiv.style.visibility = "hidden";
     form.reset();
     return true;
@@ -75,36 +77,69 @@ function formValidation() {
 }
 
 // FUNCTION: to display person object in table form
-function displayContacts(contact) {
+function displayContacts() {
 
-    const table = document.getElementById('contact-table');
-    let table_row = document.createElement('tr');
-    let user_name = document.createElement('td'); 
-    let user_number = document.createElement('td');
-    let user_email = document.createElement('td');
+    let storeContact = localStorage.getItem("storeContact"); // local storage
 
+    if(storeContact == null) {
 
-    user_name.innerText = Object.values(contact)[0];
-    user_number.innerText = Object.values(contact)[1];
-    user_email.innerText = Object.values(contact)[2];
+        contacts = []; // holds local storage
 
-    table_row.appendChild(user_name);
-    table_row.appendChild(user_number);
-    table_row.appendChild(user_email);
-    table.appendChild(table_row);
-    
+    } else {
+
+        contacts = JSON.parse(storeContact);
+    }
+
+    contacts.forEach(contact => {
+
+        addContact(contact);
+    });
+
 }
 
 // FUNCTION: to populate person object with user input
-function addContact(name, number, email) {
-
+function createContact(name, number, email) {
+    let storeContact = localStorage.getItem("storeContact"); // local storage
     let person = {};
+
+    if(storeContact == null) {
+
+        contacts = []; 
+
+    } else {
+
+        contacts = JSON.parse(storeContact);
+    }
 
     person = {"name": name,
             "mobile_number": number,
             "email": email };
 
-    displayContacts(person);
+    contacts.push(person);
+    localStorage.setItem("storeContact", JSON.stringify(contacts));
+
+    addContact(person);
+
+}
+
+// FUNCTION: Adding contacting to the table
+function addContact(contact) {
+
+    const table = document.getElementById('contact-table');  
+    let table_row = document.createElement('tr');
+    let user_name = document.createElement('td'); 
+    let user_number = document.createElement('td');
+    let user_email = document.createElement('td'); 
+
+    user_name.innerHTML = contact.name;
+    user_number.innerHTML = contact.mobile_number;
+    user_email.innerHTML = contact.email;
+
+    table_row.appendChild(user_name);
+    table_row.appendChild(user_number);
+    table_row.appendChild(user_email);
+    table.appendChild(table_row);
+
 }
 
 // FUNCTION: implents search feature to find a contact by mobile number - come back and look at this
@@ -160,16 +195,30 @@ function sortContactNames() {
             current_row = table_rows[i].getElementsByTagName("td")[0];
             next_row = table_rows[i + 1].getElementsByTagName("td")[0];
 
+            if(change_order){
 
-            if(current_row.innerHTML.toLowerCase() > next_row.innerHTML.toLowerCase()) {
-                shouldSwitch = true;
-                break;
+                if(current_row.innerHTML.toLowerCase() > next_row.innerHTML.toLowerCase()) {
+                    shouldSwitch = true;
+                    break;
+                }
+
+            } else {
+
+                if(current_row.innerHTML.toLowerCase() < next_row.innerHTML.toLowerCase()) {
+                    shouldSwitch = true;
+                    break;
+                }
             }
         }
 
         if(shouldSwitch) {
             table_rows[i].parentNode.insertBefore(table_rows[i + 1], table_rows[i]);
             switching =  true;
+
+        } else {
+
+            change_order = !change_order;
+            
         }
     }
 
