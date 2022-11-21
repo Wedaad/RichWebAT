@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="Assets/css/style.css">
+    <script src="https://unpkg.com/rxjs@7.5.7/dist/bundles/rxjs.umd.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <title>Note Taking App</title>
+</head>
+<body>
+    <div class="header"> 
+        <h1>Note Taking App</h1>
+        <p>Rich Web Application Tech. Week 2 & 3 Notes</p>
+    </div>
+    <!-- The Note Creating Box -->
+    <div id="new-note" class="new-notes">
+        <!-- Note contents -->
+        <span class="close-btn">&times;</span>
+        <div class="note-content">
+            <h2>Adding New Note</h2>
+            <form>
+                <textarea placeholder="Add new note content here..." id="note-textarea"></textarea>
+            </form>
+        </div>
+    
+        <div class="colour-list">
+            <select id="colour_list" name="colours">
+                <option value="white">White</option>
+                <option value="lightgoldenrodyellow">Yellow</option>
+                <option value="lightblue">Blue</option>
+                <option value="lightgreen">Green</option>
+                <option value="plum">Violet</option>
+                <option value="pink">Pink</option>
+            </select>
+        </div>
+        <button id="save-btn" class="buttons" onclick="saveNote(document.getElementById('colour_list').value)">Save Note</button>
+    </div>
+
+    <div class="button-container">
+        <button id="create-btn" class="buttons">Create new Notes</button>
+    </div>
+
+    <div id="created-notes">
+    </div>
+
+    <script src="Assets/scripts/problem-1.js"></script>
+</body>
+</html>
