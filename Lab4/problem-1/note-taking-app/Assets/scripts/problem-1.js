@@ -9,6 +9,10 @@ let note_container = document.createElement("div");
 let creatednotes_container = document.getElementById("created-notes");
 let note_num = 0;
 
+// when the note is saved after being created 
+const save_btn_click = fromEvent(save_btn, 'click');
+save_btn_click.subscribe(() => saveNote(document.getElementById('colour_list').value));
+
 // when create note button is clicked
 const create_notebtn_click = fromEvent(create_notebtn, 'click');
 create_notebtn_click.subscribe(() => new_note.style.display = "block");
@@ -59,16 +63,28 @@ function manageNotes() {
     updateBtn.classList.add('update-btn');
     
     // to delete the note
-    // deleteBtn.addEventListener('click', function deleteNote() {
-        
-    //         newNote_div.parentNode.removeChild(newNote_div);
+    fromEvent(deleteBtn, 'click').subscribe(() => newNote_div.parentNode.removeChild(newNote_div)); 
+
+    // fromEvent(editBtn, 'click').subscribe(() => {
+
+    //     console.log("this = " + this); 
+    //     if(editBtn.id == this.id){
+    //         console.log("this.id = " + this.id); 
+    //         document.getElementById(note_text_div.id).contentEditable = "true";
+    //         updateBtn.style.visibility = 'visible';
+
+    //         updateBtn.onclick = function() {
+    //             document.getElementById(note_text_div.id).contentEditable = "false";
+    //             updateBtn.style.visibility = 'hidden';
+    //         }
+
+    //     }
+
     // });
 
-    fromEvent(deleteBtn, 'click').subscribe(() => newNote_div.parentNode.removeChild(newNote_div)); 
-    // fromEvent(editBtn, 'click').subscribe(() => editNote());
-
     // // to edit the note 
-    editBtn.addEventListener('click', function editNote() {
+    editBtn.addEventListener('click', editNote);
+    function editNote() {
         console.log("this = " + this); 
         if(editBtn.id == this.id){
             console.log("this.id = " + this.id); 
@@ -81,27 +97,7 @@ function manageNotes() {
             }
 
         }
-    });
-
-    // function editNote() {
-        
-    //     console.log("INSIDE editNote()"); 
-    //     console.log("INSIDE editNote() - editBtn.id: " + editBtn.id);
-    //     console.log("this = " + this); 
-         
-
-    //     if(editBtn.id == this.id){
-    //         console.log("this.id = " + this.id); 
-    //         document.getElementById(note_text_div.id).contentEditable = "true";
-    //         updateBtn.style.visibility = 'visible';
-
-    //         updateBtn.onclick = function() {
-    //             document.getElementById(note_text_div.id).contentEditable = "false";
-    //             updateBtn.style.visibility = 'hidden';
-    //         }
-
-    //     }
-    // };
+    };
 
     spanDiv.append(deleteBtn);
     newNote_div.appendChild(note_text_div);
