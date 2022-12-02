@@ -11,12 +11,16 @@
 </head>
 <body>
     <div class="header">
-        <h1>Note Taking App Using RxJs</h1>
+        <h1>Note Taking App</h1>
+        <p>Using RxJs & Custom web components</p>
     </div>
 
-    <create-note name="note-1">
-        <div slot="note-content">Hi There</div>
-    </create-note>
+    <div class="button-container">
+        <button id="create-btn" class="buttons">Create new Notes</button>
+    </div>
+
+    <created-note name="note-1">
+    </created-note>
     <script src="Assets/scripts/problem-3.js"></script>
 </body>
 </html>
