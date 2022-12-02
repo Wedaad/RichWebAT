@@ -1,84 +1,70 @@
-const { fromEvent } = rxjs;
+const { interval, take, map, fromEvent } = rxjs;
 
 let timer_form = document.getElementById('timer-form');
 let start_button = document.getElementById('start-button');
-let time_hour = document.getElementById('hour');
-let time_minute = document.getElementById('minute'); 
-let time_secs = document.getElementById('sec'); 
+let displayTimer = document.getElementById("timer");
 
-function countdown() {
+// Get users hour, minutes, and seconds input
+const inputHours = document.getElementById('hour');
+const inputMinutes =document.getElementById('minute'); 
+const inputSeconds = document.getElementById('sec'); 
 
-    let seconds = parseInt(time_secs.value);
-    let minutes = parseInt(time_minute.value);
-    let hours = parseInt(time_hour.value);
-    let timer = document.getElementById("timer");
-    timer.innerHTML = "Countdown: " + hours + "h " + minutes + "m " + seconds + "s ";
+const convertInputToTime = (time) => ({
+    hours: Math.floor(time / 3600),
+    minutes: Math.floor((time % 3600 / 60)),
+    seconds: Math.floor(time % 3600 % 60)
+});
 
-    // if the user doesn't fill out all form field
+function countdown(timer) {
+
+    console.log("total_time: " + timer);
+    
+    const time = interval(1000);
+
+        time
+        .pipe(take(timer))
+        .pipe(map((val) => (timer - 1) - val)) // decrement until timer hits 0
+        .pipe(map(convertInputToTime)) // map time to hours minutes and seconds
+        .subscribe((time) => {
+            convertInputToTime(time);
+            console.log('Countdown:', time);
+            displayTimer.style.fontSize = "30px";
+            displayTimer.innerHTML = "Countdown: " + time.hours + "h " + time.minutes + "m " + time.seconds + "s";
+
+            if(time.hours == 0 && time.minutes == 0 && time.seconds == 0) {
+
+                displayTimer.innerHTML = "TIME'S UP!";
+            }
+        });
+
+}
+
+const start_button_click = fromEvent(start_button, 'click');
+start_button_click.subscribe(() => {
+
+    // converting user input to milliseconds 
+    let hours = (parseInt(inputHours.value) * 60 * 60 * 1000);
+    let mins = (parseInt(inputMinutes.value)) * 60 * 1000;
+    let secs = (parseInt(inputSeconds.value)) * 1000;
+
     if(isNaN(hours)) {
 
         hours = 0;
     }
 
-    if(isNaN(minutes)) {
+    if(isNaN(mins)) {
 
-        minutes = 0;
+        mins = 0;
     }
     
-    if(isNaN(seconds)) {
+    if(isNaN(secs)) {
 
-        seconds = 0;
+        secs = 0;
     }
 
-    // if the timer has reached 0
-    if(seconds == 0 && minutes == 0 && hours == 0) {
-
-        console.log("TIME IS UP");
-        timer.innerHTML = "TIME UP!";
-
-    } else {
-
-        // decreasing the timer
-        seconds--;
-        if(seconds < 0) {
-            if (minutes > 0) {
-
-                seconds = 59;
-                minutes--;
-
-            } else {
-
-                seconds = 0;
-                minutes = 0;
-            }
-        }
-
-        
-        // hours--;
-        if(minutes < 0) {
-            if(hours > 0){
-
-                minutes = 59;
-                hours--;
-            } else {
-
-                minutes = 0;
-                hours = 0;
-            }
-        }
-        
-    }
-
-    timer.innerHTML = "Countdown: " + hours + "h " + minutes + "m " + seconds + "s "; 
-    timer.style.fontSize = "30px";
-    setTimeout("countdown()", 1000);
-}
-
-
-const start_button_click = fromEvent(start_button, 'click');
-start_button_click.subscribe(() => {
-    console.log('Timer has begun');
-    countdown();
+    let total_time = secs + mins + hours;
+    total_time = total_time / 1000;
+    countdown(total_time);
     
 });
 
