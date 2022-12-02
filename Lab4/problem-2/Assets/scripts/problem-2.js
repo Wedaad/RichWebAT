@@ -9,6 +9,7 @@ const inputHours = document.getElementById('hour');
 const inputMinutes =document.getElementById('minute'); 
 const inputSeconds = document.getElementById('sec'); 
 
+// create a time object that has hours, minutes and seconds attributes
 const convertInputToTime = (time) => ({
     hours: Math.floor(time / 3600),
     minutes: Math.floor((time % 3600 / 60)),
@@ -17,7 +18,7 @@ const convertInputToTime = (time) => ({
 
 function countdown(timer) {
 
-    console.log("total_time: " + timer);
+    // console.log("total_time: " + timer);
     
     const time = interval(1000);
 
@@ -46,17 +47,20 @@ start_button_click.subscribe(() => {
     let hours = (parseInt(inputHours.value) * 60 * 60 * 1000);
     let mins = (parseInt(inputMinutes.value)) * 60 * 1000;
     let secs = (parseInt(inputSeconds.value)) * 1000;
-
+    
+    // if no input is given for hours / if hours is not a number
     if(isNaN(hours)) {
 
         hours = 0;
     }
 
+    // if no input is given for minutes / if minutes is not a number
     if(isNaN(mins)) {
 
         mins = 0;
     }
     
+    // if no input is given for seconds / if seconds is not a number
     if(isNaN(secs)) {
 
         secs = 0;
