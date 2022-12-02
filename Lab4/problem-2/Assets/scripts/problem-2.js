@@ -32,6 +32,7 @@ function countdown(timer) {
             displayTimer.style.fontSize = "30px";
             displayTimer.innerHTML = "Countdown: " + time.hours + "h " + time.minutes + "m " + time.seconds + "s";
 
+            // when hours, minutes and seconds of time object reaches 0
             if(time.hours == 0 && time.minutes == 0 && time.seconds == 0) {
 
                 displayTimer.innerHTML = "TIME'S UP!";
