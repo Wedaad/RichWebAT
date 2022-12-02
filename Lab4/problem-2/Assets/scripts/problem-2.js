@@ -20,7 +20,7 @@ function countdown(timer) {
 
     // console.log("total_time: " + timer);
     
-    const time = interval(1000);
+    const time = interval(1000); // emitting and updating time values every second 
 
         time
         .pipe(take(timer))
