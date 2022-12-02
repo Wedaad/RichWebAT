@@ -65,23 +65,6 @@ function manageNotes() {
     // to delete the note
     fromEvent(deleteBtn, 'click').subscribe(() => newNote_div.parentNode.removeChild(newNote_div)); 
 
-    // fromEvent(editBtn, 'click').subscribe(() => {
-
-    //     console.log("this = " + this); 
-    //     if(editBtn.id == this.id){
-    //         console.log("this.id = " + this.id); 
-    //         document.getElementById(note_text_div.id).contentEditable = "true";
-    //         updateBtn.style.visibility = 'visible';
-
-    //         updateBtn.onclick = function() {
-    //             document.getElementById(note_text_div.id).contentEditable = "false";
-    //             updateBtn.style.visibility = 'hidden';
-    //         }
-
-    //     }
-
-    // });
-
     // // to edit the note 
     editBtn.addEventListener('click', editNote);
     function editNote() {
