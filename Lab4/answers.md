@@ -8,6 +8,9 @@ A stream represents data that is created and processed in an incremental manner.
 ###### Assume that you are building an interface to an API in your Rich Web App. Describe in detail how you could use the RxJS library to handle asynchronous network responses to API requests. In your opinion, what are the benefits to using a streams library for networking over, say, promises? And what do you think are the downsides?
 
 ##### Answer:
+The RxJs library allows for programmes to use asynchronous data programming. RxJs is based on the implementation of Observables and observers. Observables will be used to do API calls. When making requests to an API the pipe and map operators are used by the Observable. Observable streams are created from HTTP requests e.g. GET/POST/PUT requests. API requests are usually handled with the use of promises. 
+
+With RxJs asynchronous network responses can happen becuase RxJs allows it. There is no need to block other operations from running while waiting for a response because the observable creates an observer waiting on standby to act appropriately when needed. 
 
 
 #### Question 3:
