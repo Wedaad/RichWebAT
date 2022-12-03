@@ -71,8 +71,8 @@ class Note extends HTMLElement {
             console.log("note saved: " + noteToBeSaved.id);
 
             let note_message = this.shadowRoot.querySelector("textarea").value;
+            noteToBeSaved.classList.add("post-it");
             noteToBeSaved.append(note_message);
-            note_message.classList.add("note-message");
 
             this.shadowRoot.querySelector("textarea").value = "";
             this.shadowRoot.getElementById("add-note-div").style.display = "none";

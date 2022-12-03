@@ -52,9 +52,9 @@ body {
 
 }
 
-.created-notes-container {
+#created-notes-container {
 
-
+    padding: 30px;
 }
 
 
