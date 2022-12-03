@@ -15,6 +15,7 @@ note_template.innerHTML = `
             resize: none;
 
         }
+
     </style>
     <div id="add-note-div" class="add-note">
         <h2>Adding New Note</h2>
@@ -70,12 +71,15 @@ class Note extends HTMLElement {
             console.log("note saved :)");
             console.log("note saved: " + noteToBeSaved.id);
 
+            let note_message_div = document.createElement("div");
+            note_message_div.classList.add('note-message');
             let note_message = this.shadowRoot.querySelector("textarea").value;
-            noteToBeSaved.append(note_message);
+            note_message_div.append(note_message);
 
             let deleteBtn = document.createElement("button");
             deleteBtn.innerHTML = "Delete Note";
             deleteBtn.classList.add("delete-button");
+            noteToBeSaved.appendChild(note_message_div);
             noteToBeSaved.appendChild(deleteBtn);
 
             this.shadowRoot.querySelector("textarea").value = "";
