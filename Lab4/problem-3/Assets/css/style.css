@@ -52,21 +52,11 @@ body {
 
 }
 
+.created-notes-container {
 
-.close-btn {
-    color: white;
-    float: right;
-    font-size: 3rem;
-    font-weight: bold;
-    padding-right: 5%;
+
 }
 
-.close-btn:hover,
-.close-btn:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
 
 /* Note sheet */
 textarea {
