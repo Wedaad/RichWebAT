@@ -52,8 +52,6 @@ class Note extends HTMLElement {
     }
     
     connectedCallback() {
-
-        // const delete_button =  this.shadowRoot.querySelector('#deleteBtn');
         const create_note_button = document.getElementById('create-btn');
 
         const button_click = fromEvent(create_note_button, 'click');
@@ -67,20 +65,32 @@ class Note extends HTMLElement {
             let noteToBeSaved = this.shadowRoot.querySelector('#created-note-' + note_num);
             let holdNotes = document.getElementById("created-notes-container");
             holdNotes.appendChild(noteToBeSaved);
-            holdNotes.style.border = "5px solid yellow";
-            console.log("note saved :)");
-            console.log("note saved: " + noteToBeSaved.id);
 
             let note_message_div = document.createElement("div");
             note_message_div.classList.add('note-message');
             let note_message = this.shadowRoot.querySelector("textarea").value;
             note_message_div.append(note_message);
 
+            // const note_note_message_div_click = fromEvent(note_message_div, "click");
+            // note_note_message_div_click.subscribe(() => {
+
+            //     console.log("Editing notes");
+            //     document.getElementById(note_message_div.id).contentEditable = "true";
+            // });
+
             let deleteBtn = document.createElement("button");
             deleteBtn.innerHTML = "Delete Note";
             deleteBtn.classList.add("delete-button");
+            deleteBtn.id = "delete-btn" + note_num;
+          
             noteToBeSaved.appendChild(note_message_div);
             noteToBeSaved.appendChild(deleteBtn);
+
+            const delete_button_click = fromEvent(deleteBtn, "click");
+            delete_button_click.subscribe(() => {
+
+                noteToBeSaved.parentNode.removeChild(noteToBeSaved);
+            })
 
             this.shadowRoot.querySelector("textarea").value = "";
             this.shadowRoot.getElementById("add-note-div").style.display = "none";
