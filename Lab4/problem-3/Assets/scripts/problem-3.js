@@ -1,35 +1,26 @@
 const { fromEvent } = rxjs;
 console.log("js running")
 
+let note_num = 0;
 const note_template = document.createElement("template");
 note_template.innerHTML = `
     <style>
-        .note-container {
+        textarea {
 
-            border: "5px solid red;
-            height: 100px;
-            width: 80px;
-            margin: 10px;
-        }
+            width: 30%;
+            min-height: 300px;
+            border: 2px solid black;
+            border-radius: 4px;
+            padding: 12px 20px;
+            resize: none;
 
-        .note-container button {
-
-            background-color: black;
-            color: white;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-        }
-
-        .note-container h2 {
-            text-align: center;
         }
     </style>
-    <div class="note-container">
-        <div class="note">
-            <p><slot name="contents"/></p>
-        </div>
-        <button id="deleteBtn">Delete Note</button>
+    <div id="add-note-div" class="add-note">
+        <h2>Adding New Note</h2>
+        <form>
+            <textarea placeholder="Add new note content here..." id="note-textarea"></textarea>
+        </form>
     </div>
 `;
 
@@ -49,40 +40,16 @@ class Note extends HTMLElement {
     
     createNote() {
 
-        console.log("Inside createNote()");
-        // this.showNote = true;
-
-        // const note = this.shadowRoot.querySelector('.note-container');
-
-        const container = document.createElement("div");
-        let note_form = document.createElement("form");
-        let note_textarea = document.createElement("textarea");
-        let save_button = document.createElement("button");
-        save_button.innerHTML = "Save Note";
-
-        note_form.appendChild(note_textarea);
-        container.appendChild(note_form);
-        container.appendChild(save_button);
-        save_button.id = "save-btn"
-        container.style.border = "5px solid red";
-        this.shadowRoot.appendChild(container);
-        this.shadowRoot.appendChild(save_button);
-
-        const save_btn = this.shadowRoot.getElementById('save-btn');
-
-        const save_btn_click = fromEvent(save_btn, 'click');
-        save_btn_click.subscribe(() => console.log("note saved :)"));
-        // const deleteBtn = this.shadowRoot.querySelector('#deleteBtn');
-
-        // this.shadowRoot.appendChild(note);
-        // if(this.showNote) {
-
-        //     note.style.display = 'block';
-        //     deleteBtn.innerText = 'delete note !';
-        // }
-    	
+        this.showNote = true;
+        this.shadowRoot.appendChild(note_template.content);
+        const new_note = document.createElement("div");
+        note_num++;
+        new_note.id = "created-note-" + note_num;
+        new_note.classList.add("post-it");
+        this.shadowRoot.appendChild(new_note);
+        this.shadowRoot.getElementById("add-note-div").style.display = "block";
     }
-
+    
     connectedCallback() {
 
         // const delete_button =  this.shadowRoot.querySelector('#deleteBtn');
@@ -90,8 +57,28 @@ class Note extends HTMLElement {
 
         const button_click = fromEvent(create_note_button, 'click');
         button_click.subscribe(() => this.createNote());
+
+        const save_btn = document.getElementById('save-btn');
+
+        const save_btn_click = fromEvent(save_btn, 'click');
+        save_btn_click.subscribe(() => {
+      
+            let noteToBeSaved = this.shadowRoot.querySelector('#created-note-' + note_num);
+            let holdNotes = document.getElementById("created-notes-container");
+            holdNotes.appendChild(noteToBeSaved);
+            holdNotes.style.border = "5px solid yellow";
+            console.log("note saved :)");
+            console.log("note saved: " + noteToBeSaved.id);
+
+            let note_message = this.shadowRoot.querySelector("textarea").value;
+            noteToBeSaved.append(note_message);
+            note_message.classList.add("note-message");
+
+            this.shadowRoot.querySelector("textarea").value = "";
+            this.shadowRoot.getElementById("add-note-div").style.display = "none";
+        });
     }
 }
 
-customElements.define("created-note", Note);
+customElements.define("create-note", Note);
 
