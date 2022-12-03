@@ -38,7 +38,7 @@ class Note extends HTMLElement {
       
     }
     
-    createNote() {
+    createNote() { 
 
         this.showNote = true;
         this.shadowRoot.appendChild(note_template.content);
@@ -71,8 +71,12 @@ class Note extends HTMLElement {
             console.log("note saved: " + noteToBeSaved.id);
 
             let note_message = this.shadowRoot.querySelector("textarea").value;
-            noteToBeSaved.classList.add("post-it");
             noteToBeSaved.append(note_message);
+
+            let deleteBtn = document.createElement("button");
+            deleteBtn.innerHTML = "Delete Note";
+            deleteBtn.classList.add("delete-button");
+            noteToBeSaved.appendChild(deleteBtn);
 
             this.shadowRoot.querySelector("textarea").value = "";
             this.shadowRoot.getElementById("add-note-div").style.display = "none";
