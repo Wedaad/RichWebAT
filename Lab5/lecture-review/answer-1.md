@@ -5,13 +5,12 @@ Props are used to pass information from one React component to another. Props ar
 
 ##### Code Example:
 
-`
-function Person(props) {
+`function Person(props) {`
 
     return <h2> My name is {props.name}.</h2>
-}
+`}`
 
-function Staff() {
+`function Staff() {`
 
     return (
 
@@ -21,7 +20,6 @@ function Staff() {
         </>
 
     );
-}
+`}`
 
-ReactDOM.render(<Staff/>, document.getElementById('root'));
-`
+`ReactDOM.render(<Staff/>, document.getElementById('root'));`
