@@ -14,9 +14,10 @@ The problem with callback functions is that error handling isn't as efficient co
 Promises in JavaScript is another way of providing asynchronous operations. Promises are able to handle more that one asychronous functions with better error handling with the use of `.then() and .catch() methods`. 
 
 ## Disadvantage:
-The main problem with promises is that they can't be used with older browsers. Promises are also slower that callback functions because of the way they work.
+The main problem with promises is that they can't be used with older browsers. Promises are also slower that callback functions because of the way they work - as they are unable to handle data sources that provide more than one value.
 
 ### Streams
 #### Advantage:
+One of the advantages of streams is that streams don't have to wait for the entire data to be transmitted. The data being transmitted is recieved in small chunks and each chunk is then individually processed
 
 #### Disadvantage
