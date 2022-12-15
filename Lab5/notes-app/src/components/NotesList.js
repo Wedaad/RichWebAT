@@ -4,7 +4,7 @@ import Note from './Note'
 export default function NotesList() {
   return (
     <div className='notes-list'>
-        <p>Display created notes</p>
+        <h2>Your Created Notes: </h2>
         <Note/>
     </div>
   )

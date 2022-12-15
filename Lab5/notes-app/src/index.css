@@ -145,4 +145,17 @@ select {
   padding: 1rem;
   width: 15%;
   min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.note-icons {
+
+  font-size: 1.5rem;
+}
+
+.edit-icon {
+  
+  float: right;
 }
