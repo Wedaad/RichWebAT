@@ -5,6 +5,7 @@ import Note  from './Note';
 export default function CreateNote({setIsShown, addNewNote}) {
 
   const [noteText, setNoteText] = useState("");
+  const [colour, setColour] = useState();
 
   // getting the note message the user enters
   const getNoteText = (event) => {
@@ -15,7 +16,7 @@ export default function CreateNote({setIsShown, addNewNote}) {
   // saving note
   const saveNote = () => {
     console.log("Note saved :)");
-    addNewNote(noteText);
+    addNewNote(noteText, colour);
     
   }
 
@@ -33,8 +34,9 @@ export default function CreateNote({setIsShown, addNewNote}) {
         </div>
 
         <div className="colour-list">
-          <select id="colour_list" name="colours">
-            <option value="white">White</option>
+          <select id="colour_list" name="colours" value={colour} onChange={e => setColour(e.target.value)}>
+            <option>Selet a colour</option>
+            <option value="#FAC98F">Pastel Orange</option>
             <option value="lightgoldenrodyellow">Yellow</option>
             <option value="#BFEFE4">Pastel Blue</option>
             <option value="lightgreen">Green</option>

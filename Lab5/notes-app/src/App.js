@@ -4,10 +4,7 @@ import NotesList from "./components/NotesList";
 import CreateNote from "./components/CreateNote";
 
 const App = () => {
-  const [notes, setNotes] = useState([{
-    note_id: nanoid(),
-    note_text: ""
-  }]);
+  const [notes, setNotes] = useState([]); // keeps the created notes
   const [isShown, setIsShown] = useState(false);
 
   const NewNote = event => {
@@ -24,16 +21,17 @@ const App = () => {
   };
 
 
-  const addNote = (note_message) => {
+  const addNote = (note_message, colour) => {
 
     console.log("Note message (App.js): " + note_message);
     const new_note = {
       note_id: nanoid(),
-      note_text: note_message
+      note_text: note_message,
+      background_colour: colour
 
     }
 
-    const newNotes = [...notes, new_note];
+    const newNotes = [...notes, new_note]; //adding new note to the existing array of notes
     setNotes(newNotes);
   }
  
