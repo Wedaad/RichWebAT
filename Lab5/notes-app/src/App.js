@@ -1,25 +1,49 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { nanoid } from 'nanoid';
+import NotesList from "./components/NotesList";
+import CreateNote from "./components/CreateNote";
 
-function App() {
+const App = () => {
+  const [notes, setNotes] = useState([{
+    not_id: nanoid(),
+    note_text: ""
+  }]);
+  const [isShown, setIsShown] = useState(false);
+
+  const NewNote = event => {
+
+    console.log("You clicked create note");
+    setIsShown(true);
+  };
+
+  const CloseCreateNote = event => {
+
+    console.log("You clicked close create note");
+    setIsShown(false);
+
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      <div className="header">
+          <h1>Note Taking App</h1>
+          <p>Created using ReactJs</p>
+          <small>Rich Web Application Technology Week 11 Lab</small>
+      </div>
+      <div className="button-container">
+        <button onClick={NewNote} className='create-note-btn'>Create Notes</button>
+      </div>
+      
+      {isShown && 
+      <CreateNote setIsShown={CloseCreateNote}/>}
+
+      <h2>Your Created Notes:</h2>
+      <div className="notes-container">
+        <NotesList notes={notes}/>
+      </div>
+
+    </> 
+  )
 }
 
 export default App;
