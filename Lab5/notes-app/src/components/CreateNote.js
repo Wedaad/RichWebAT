@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { MdClose } from 'react-icons/md'
-import Note  from './Note';
 
 export default function CreateNote({setIsShown, addNewNote}) {
 

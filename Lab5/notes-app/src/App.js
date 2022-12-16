@@ -22,10 +22,10 @@ const App = () => {
 
 
   const addNote = (note_message, colour) => {
+    const note_ID = nanoid();
 
-    console.log("Note message (App.js): " + note_message);
     const new_note = {
-      note_id: nanoid(),
+      note_id: note_ID,
       note_text: note_message,
       background_colour: colour
 
@@ -34,7 +34,16 @@ const App = () => {
     const newNotes = [...notes, new_note]; //adding new note to the existing array of notes
     setNotes(newNotes);
   }
- 
+
+  // deletes notes
+  const deleteNote = (note_id) => {
+    
+    const newNotes = notes.filter((note) => note.note_id !== note_id);
+    setNotes(newNotes);
+    console.log("Note deleted!");
+
+  }
+  
   return (
     <>
       <div className="header">
@@ -51,7 +60,7 @@ const App = () => {
 
       <h2>Your Created Notes:</h2>
       <div className="notes-container">
-        <NotesList notes={notes}/>
+        <NotesList notes={notes} deleteNotes={deleteNote}/>
       </div>
 
     </> 
