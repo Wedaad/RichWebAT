@@ -5,7 +5,7 @@ import CreateNote from "./components/CreateNote";
 
 const App = () => {
   const [notes, setNotes] = useState([{
-    not_id: nanoid(),
+    note_id: nanoid(),
     note_text: ""
   }]);
   const [isShown, setIsShown] = useState(false);
@@ -23,6 +23,20 @@ const App = () => {
 
   };
 
+
+  const addNote = (note_message) => {
+
+    console.log("Note message (App.js): " + note_message);
+    const new_note = {
+      note_id: nanoid(),
+      note_text: note_message
+
+    }
+
+    const newNotes = [...notes, new_note];
+    setNotes(newNotes);
+  }
+ 
   return (
     <>
       <div className="header">
@@ -35,7 +49,7 @@ const App = () => {
       </div>
       
       {isShown && 
-      <CreateNote setIsShown={CloseCreateNote}/>}
+      <CreateNote setIsShown={CloseCreateNote} addNewNote={addNote}/>}
 
       <h2>Your Created Notes:</h2>
       <div className="notes-container">

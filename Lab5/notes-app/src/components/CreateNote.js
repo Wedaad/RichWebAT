@@ -2,12 +2,21 @@ import React, { useState } from 'react'
 import { MdClose } from 'react-icons/md'
 import Note  from './Note';
 
-export default function CreateNote({setIsShown}) {
+export default function CreateNote({setIsShown, addNewNote}) {
 
-  const SaveNote = () => {
-    console.log("Note saved :)")
+  const [noteText, setNoteText] = useState("");
+
+  // getting the note message the user enters
+  const getNoteText = (event) => {
+    setNoteText(event.target.value);
+
+  }
+
+  // saving note
+  const saveNote = () => {
+    console.log("Note saved :)");
+    addNewNote(noteText);
     
- 
   }
 
   return (
@@ -16,9 +25,11 @@ export default function CreateNote({setIsShown}) {
         <MdClose className='close-btn' onClick={setIsShown}/>
         <div className='new-note-content'>
           <h2>Creating New Note</h2>
-              <form>
-                <textarea placeholder='Add new note content here...'></textarea>
-              </form>
+              <textarea 
+              placeholder='Add new note content here...'
+              value={noteText}
+              onChange={getNoteText}
+              ></textarea>
         </div>
 
         <div className="colour-list">
@@ -32,7 +43,7 @@ export default function CreateNote({setIsShown}) {
           </select>
         </div>
 
-        <button className='save-note-btn' onClick={SaveNote}>Save Note</button>
+        <button className='save-note-btn' onClick={saveNote}>Save Note</button>
       </div>
     </div>
   )
