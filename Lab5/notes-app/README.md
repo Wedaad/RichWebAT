@@ -10,6 +10,11 @@ This application allows you to create, add, edit and delete your notes. All note
 ##### Adding a new note:
 ![image](https://user-images.githubusercontent.com/57072598/208250056-8af5c024-01e5-4701-b6d8-065c9f90489e.png)
 
+Colours can be chosen from a dropdown menu:
+
+![image](https://user-images.githubusercontent.com/57072598/208251406-5dfa5a32-d125-40ea-bdda-d4181315249a.png)
+
+
 ##### Dispalying created notes
 ![image](https://user-images.githubusercontent.com/57072598/208250278-e05927ac-df17-4969-a39f-8d6582f0c0c0.png)
 
