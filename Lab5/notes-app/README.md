@@ -1,6 +1,7 @@
 # Note Taking App with ReactJS
 
-If you clone the repo (cd into lab5/nptes-app) you can run this application using `npm start` and open http://localhost:3000 to view it in your browser.
+- If you clone the repo (cd into lab5/nptes-app) you can run this application using `npm start` and open http://localhost:3000 to view it in your browser.
+- If you download the zipped code you can un-zip the folder and cd into lab5/nptes-app you can run this application using `npm start` and open http://localhost:3000 to view it in your browser
 
 ## Functionalites
 This application allows you to create, add, edit and delete your notes. All notes are stored in local storage unless they have been deleted.
