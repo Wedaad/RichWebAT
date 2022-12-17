@@ -5,10 +5,22 @@ import CreateNote from "./components/CreateNote";
 import EditNote from "./components/EditNote";
 
 const App = () => {
-  const [notes, setNotes] = useState([]); // keeps the created notes
+  // retrieving notes stored in localstorage
+  const [notes, setNotes] = useState(() => {
+    const storedNotes = JSON.parse(localStorage.getItem('notes-app-data'));
+    return storedNotes || []; 
+
+  });
+  
   const [isShown, setIsShown] = useState(false);
   const [visible, setIsVisible] = useState(false);
   const [editID, setEditID] = useState();
+  
+  // storing the notes in local storage
+  useEffect(() => {
+
+    localStorage.setItem('notes-app-data', JSON.stringify(notes));
+  }, [notes]);
 
   const NewNote = event => {
 
