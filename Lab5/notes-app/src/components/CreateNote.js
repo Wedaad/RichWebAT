@@ -35,12 +35,12 @@ export default function CreateNote({setIsShown, addNewNote}) {
 
         <div className="colour-list">
           <select id="colour_list" name="colours" value={colour} onChange={e => setColour(e.target.value)}>
-            <option value="white">Selet a colour</option>
+            <option value="#EAE8E3">Selet a colour</option>
             <option value="#FAC98F">Pastel Orange</option>
             <option value="lightgoldenrodyellow">Yellow</option>
             <option value="#BFEFE4">Pastel Blue</option>
             <option value="lightgreen">Green</option>
-            <option value="plum">Violet</option>
+            <option value="#F0D5F0">Violet</option>
             <option value="pink">Pink</option>
           </select>
         </div>
