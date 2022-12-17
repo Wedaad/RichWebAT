@@ -1,5 +1,5 @@
 # Note Taking App with ReactJS
-
+- You can use this application: https://wedaadharuna.netlify.app/
 - If you clone the repo (cd into lab5/notes-app) you can run this application using `npm start` and open http://localhost:3000 to view it in your browser.
 - If you download the zipped code you can un-zip the folder and cd into lab5/notes-app you can run this application using `npm start` and open http://localhost:3000 to view it in your browser
 
